@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather apk</title>
+</head>
+<body>
+    <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+        <div class="wave -three"></div>
+        
+        <div id="weather-con">
+            <i id="sun" class="fas fa-sun" style="color: #fce3ae;"></i>
+            
+        </div>
+        <div class="info">
+            <h2 class="location"> <i class="fas fa-street-view"></i>{%location%},  {%country%}</h2>
+            <p id="date">WED | Oct 23| 10:49</p>
+            <h1 class="temp">{%tempVal%}&deg;C</h1>
+            <h3 class="temp-minmax">Min {%tempMin%}&deg;C , Max {%tempMax%} <&deg;C</h3>
+        </div>
+    </div>
+
+    <script>
+        const curDate = document.getElementById("date")
+        const weathercon = document.getElementById("weather-con")
+        const tempStatus = "Clouds"
+        let currentTime = new Date();
+        let weekDay =['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+        let months=['Jan','Feb','Mar','April','May','June','July','Aug','Sept','Oct','Nov','Dec',]
+        let days = ()=>{
+            d = (weekDay[currentTime.getDay()]);
+            return d;
+        }
+        let times = ()=>{
+            let month =months[currentTime.getMonth()] ;
+            let date = currentTime.getDate();
+            let year = currentTime.getFullYear();
+            let hour = currentTime.getHours()
+            let minute = currentTime.getMinutes()
+            // console.log(date+"/"+month+'/'+year);
+            let meridian = "PM";
+            if (hour >11) {
+                meridian = "AM";
+                if(hour>12){
+                    hour= hour - 12 ;
+                }
+            }
+            if(minute<10){
+                minute = "0"+minute;
+            }
+            return`${month} ${date} | ${hour}:${minute} ${meridian}`
+        };
+        // console.log(times());
+        console.log(currentTime.getHours());    // it will give time in railway format
+
+        curDate.innerHTML = days() + "|" + times()
+
+    </script>
+</body>
+</html>
